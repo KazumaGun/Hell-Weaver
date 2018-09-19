@@ -20,9 +20,9 @@ public class Hero : MonoBehaviour
     public LayerMask thisIsGround; //selection of layers availble\\
     private Collider2D heroCollider;
 
+    //JUMPING TIMER\\
     public float countdown;
-    [SerializeField]
-    private float timer;
+    [SerializeField] public float timer;
 
 
     void Start()
@@ -40,6 +40,8 @@ public class Hero : MonoBehaviour
     void Update()
     {
 
+
+
         isGrounded = Physics2D.IsTouchingLayers(heroCollider, thisIsGround); //checks the colliders in a layer\\
 
 
@@ -48,28 +50,39 @@ public class Hero : MonoBehaviour
         heroRigidbody.gameObject.transform.Translate(Vector2.right * heroSpeed * Time.deltaTime);
 
         //JUMPING\\
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
-            //heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump); //Y is the hero jumping\\
-            heroRigidbody.AddForce(Vector2.up * heroJump);
-            Debug.Log("Jump!");
-
-            if (isGrounded)
-            {
-                if (timer < countdown)
-                {
-                    heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump);
-                    timer += Time.deltaTime;
-                }
-            }
-            else
-            {
-                timer = 0;
-            }
+            //Jump(); 
         }
 
+        if(Input.touchCount > 0)
+        {
+            Jump(); 
+        }
+
+        
     }
 
-    
+    void Jump()
+    {
+        //heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump); //Y is the hero jumping\\
+        heroRigidbody.AddForce(Vector2.up * heroJump);
+        Debug.Log("Jump!");
+
+
+
+        if (isGrounded)
+        {
+            if (timer < countdown)
+            {
+                heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump);
+                timer += Time.deltaTime;
+            }
+        }
+        else
+        {
+            timer = 0;
+        }
+    }
 
 }
