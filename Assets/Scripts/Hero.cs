@@ -1,5 +1,6 @@
 ﻿//KAZ WALSH\\
 //PLAYER SCRIPT\\
+//CONTAINS MOVEMENT, JUMPING
 
 
 using System.Collections;
@@ -8,25 +9,29 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    public Rigidbody2D heroRigidBody2D;
-    public float heroSpeed = 2.0f;
+    private Rigidbody2D heroRigidbody;
 
-    public Vector3 myHero;
+    public float heroSpeed;
+    public float heroJump;
 
-	// Use this for initialization
-	void Start ()
+    void Start()
     {
-        myHero = transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            myHero = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            myHero.z = transform.position.z;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, myHero, heroSpeed * Time.deltaTime);
+        //Get rigid body at start of game\\
+        heroRigidbody = GetComponent<Rigidbody2D>();
     }
+
+    void Update()
+    {
+        heroRigidbody.velocity = (Vector2.right * heroSpeed); //Only want the player to move a constant speed, not messing with Y value\\
+
+        //JUMPING\\
+        if (Input.GetMouseButtonDown(1))
+        {
+            heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump); //Y is the hero jumping\\
+            //heroRigidbody.AddForce(Vector2.up * heroJump);
+            Debug.Log("Jump!");
+        }
+    }
+
+
 }
