@@ -25,6 +25,8 @@ public class Hero : MonoBehaviour
     [SerializeField] public float timer;
 
 
+
+
     void Start()
     {
         //Get rigid body at start of game\\
@@ -52,13 +54,15 @@ public class Hero : MonoBehaviour
         //JUMPING\\
         if (Input.GetMouseButton(0))
         {
-            //Jump(); 
+            Jump(); 
         }
 
         if(Input.touchCount > 0)
         {
             Jump(); 
         }
+
+        
 
         
     }
@@ -83,6 +87,11 @@ public class Hero : MonoBehaviour
         {
             timer = 0;
         }
+    }
+
+    void RedGun()
+    {
+
     }
 
 }

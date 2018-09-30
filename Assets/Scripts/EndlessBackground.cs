@@ -17,8 +17,8 @@ public class EndlessBackground : MonoBehaviour
 
         if (transform.position.x <= endBackground)
         {
-            Vector2.position = new Vector2(startBackground , transform.position.y);
-            transform.position = position;
+            //Vector2.position = new Vector2(startBackground , transform.position.y);
+            //transform.position = position;
         }
 	}
 }
