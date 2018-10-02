@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hero
   - Vine
+  - Enemy
   layers:
   - Default
   - TransparentFX

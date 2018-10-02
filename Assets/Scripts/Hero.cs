@@ -89,9 +89,22 @@ public class Hero : MonoBehaviour
         }
     }
 
-    void RedGun()
+    protected void OnCollsionEnter(Collision aCollision)
     {
+        GameObject aCollisionObject;
+        aCollisionObject = aCollision.gameObject;
 
+        //When enemy runs into hero, deactive the hero\\
+
+        Enemy aEnemy;
+        aEnemy = aCollisionObject.GetComponent<Enemy>();
+
+        if (aEnemy != null)
+        {
+            gameObject.SetActive(false);
+            print("YOU DIED!!!");
+        }
     }
+        
 
 }
