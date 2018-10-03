@@ -8,6 +8,11 @@ TagManager:
   - Vine
   - Enemy
   - WorldObstacle
+  - Spike
+  - Pomegranate
+  - HermesShoe
+  - HadesHelm
+  - CerberusCoin
   layers:
   - Default
   - TransparentFX

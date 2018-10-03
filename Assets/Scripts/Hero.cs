@@ -31,7 +31,9 @@ public class Hero : MonoBehaviour
 
     [SerializeField] bool aPomegranate;
     [SerializeField] Collider2D pomegranateCollider;
-   
+
+    private string theRules = " Tap to jump and hold down for longer jump " +
+        " White ball is a speed boost " + " red ball allows you to walk through objects ";
 
 
 
@@ -42,10 +44,15 @@ public class Hero : MonoBehaviour
         heroRigidbody = GetComponent<Rigidbody2D>();
 
         heroCollider = GetComponent<Collider2D>(); //For checking ground\\
+
+        
     }
 
 
-
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 400, 50), theRules);
+    }
 
 
     void Update()
@@ -69,7 +76,7 @@ public class Hero : MonoBehaviour
 
 
 
-
+        
 
         //JUMPING\\
         if (Input.GetMouseButton(0))
@@ -90,7 +97,7 @@ public class Hero : MonoBehaviour
     public IEnumerator HermesBoost()
     {
         hermesShoe = true;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(4);
         hermesShoe = false;
     }
     public IEnumerator PomegranateBoost()
@@ -126,7 +133,7 @@ public class Hero : MonoBehaviour
         }
     }
 
-    protected void OnCollsionEnter(Collision aCollision)
+    /*protected void OnCollsionEnter(Collision aCollision)
     {
         GameObject aCollisionObject;
         aCollisionObject = aCollision.gameObject;
@@ -141,7 +148,24 @@ public class Hero : MonoBehaviour
             gameObject.SetActive(false);
             print("YOU DIED!!!");
         }
+    }*/
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            gameObject.SetActive(false);
+        }
     }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (gameObject.tag == "HermesShoe")
+        {
+           
+        }
         
+    }
+
 
 }
