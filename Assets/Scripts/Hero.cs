@@ -24,6 +24,15 @@ public class Hero : MonoBehaviour
     public float countdown;
     [SerializeField] public float timer;
 
+    //SPEED BOOST\\
+    [Header("Power-Ups")]
+    [SerializeField] bool hermesShoe;
+    [SerializeField] private float hermesSpeed;
+
+    [SerializeField] bool aPomegranate;
+    [SerializeField] Collider2D pomegranateCollider;
+   
+
 
 
 
@@ -49,7 +58,18 @@ public class Hero : MonoBehaviour
 
         //MOVEMENT\\
         //heroRigidbody.velocity = (Vector2.right * heroSpeed); //Only want the player to move a constant speed, not messing with Y value\\
-        heroRigidbody.gameObject.transform.Translate(Vector2.right * heroSpeed * Time.deltaTime);
+        if (!hermesShoe)
+        {
+            heroRigidbody.gameObject.transform.Translate(Vector2.right * heroSpeed * Time.deltaTime);
+        }
+        else
+        {
+            heroRigidbody.gameObject.transform.Translate(Vector2.right * hermesSpeed * Time.deltaTime); //HERMES BOOST\\
+        }
+
+
+
+
 
         //JUMPING\\
         if (Input.GetMouseButton(0))
@@ -63,9 +83,26 @@ public class Hero : MonoBehaviour
         }
 
         
-
-        
+      
     }
+
+    //HERMES BOOST\\
+    public IEnumerator HermesBoost()
+    {
+        hermesShoe = true;
+        yield return new WaitForSeconds(7);
+        hermesShoe = false;
+    }
+    public IEnumerator PomegranateBoost()
+    {
+        Physics2D.IgnoreLayerCollision(8, 10, true);
+        aPomegranate = true;
+        yield return new WaitForSeconds(7);
+        Physics2D.IgnoreLayerCollision(8, 10, false);
+        aPomegranate = false;
+
+    }
+
 
     void Jump()
     {
