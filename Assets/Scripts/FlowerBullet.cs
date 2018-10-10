@@ -21,7 +21,9 @@ public class FlowerBullet : MonoBehaviour
         velocity += m_Speed * Vector3.right;
 
         m_RigidBody.velocity = velocity;
+
     }
+
 
     // Laser collided with an enemy!
 
@@ -34,3 +36,4 @@ public class FlowerBullet : MonoBehaviour
         }
     }
 }
+

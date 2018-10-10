@@ -100,6 +100,7 @@ public class Hero : MonoBehaviour
         if (m_CooldownTimer < 0.0f)
         {
             m_CooldownTimer = 0.0f;
+            Destroy(flowerBullet);
         }
 
         if (Input.GetKey(KeyCode.Space) && (m_CooldownTimer == 0.0f))
@@ -108,6 +109,7 @@ public class Hero : MonoBehaviour
             vine = Instantiate(flowerBullet);
             vine.transform.position = transform.position + flowerDist * Vector3.right;
             m_CooldownTimer = m_CooldownDur;
+            
         }
     }
 
