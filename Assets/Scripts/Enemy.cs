@@ -4,38 +4,34 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Rigidbody2D enemyRigidBody = null;
+    [SerializeField] private float enemySpeed = 2.0f;
 
-    [SerializeField] private float enemySpeed = 1.0f;
-    [SerializeField] private Vector2 enemyDirection = Vector3.right;
+    [SerializeField] Hero myHero = null;
+    [SerializeField] int myHitPoints = 20;
 
-    private Rigidbody2D enemyRigidbody;
-
-
-    void Start ()
+    void Start()
     {
-        enemyRigidbody = GetComponent<Rigidbody2D>();
-        enemyRigidbody.velocity = enemySpeed * enemyDirection;
-	}
-	
-	
-	void Update ()
+        enemyRigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
     {
-		
-	}
+        Vector3 velocity = Vector3.zero;
+        velocity += enemySpeed * Vector3.down;
 
-    /*protected void OnCollisionEnter(Collision aCollision)
-    {
-        GameObject aCollisionObject;
-        aCollisionObject = aCollision.gameObject;
+        // The boss follows the player a little bit.
 
-        //Enemy destroys hero???????\\
-
-        Hero aHero;
-        aHero = aCollisionObject.GetComponent<Hero>();
-
-        if (aHero != null)
+        if (transform.position.x < myHero.transform.position.x)
         {
-            Destroy(gameObject);
+            velocity += enemySpeed * Vector3.right;
         }
-    }*/
+        else
+        if (transform.position.x > myHero.transform.position.x)
+        {
+            velocity += enemySpeed * Vector3.left;
+        }
+
+        enemyRigidBody.velocity = velocity;
+    }
 }

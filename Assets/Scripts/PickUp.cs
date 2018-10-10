@@ -20,9 +20,9 @@ public class PickUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject aCollisionObject = collision.gameObject;
-        if(aCollisionObject.tag == "Hero")
+        if (aCollisionObject.tag == "Hero")
         {
-            switch(typeOfPickup)
+            switch (typeOfPickup)
             {
                 case PickupType.HermesShoe:
                     StartCoroutine(aCollisionObject.GetComponent<Hero>().HermesBoost());
@@ -37,11 +37,11 @@ public class PickUp : MonoBehaviour
                     //call cerberusfunction
                     break;
             }
+
+            Destroy(gameObject);
         }
 
-       
+
     }
-
-
 
 }

@@ -35,7 +35,12 @@ public class Hero : MonoBehaviour
     private string theRules = " Tap to jump and hold down for longer jump " +
         " White ball is a speed boost " + " red ball allows you to walk through objects ";
 
-
+    //VINE WHIP\\
+    
+    [SerializeField] private GameObject flowerBullet;
+    [SerializeField] private float flowerDist;
+    [SerializeField] private float m_CooldownDur = 1.0f;
+    [SerializeField] private float m_CooldownTimer = 0.0f;
 
 
     void Start()
@@ -45,7 +50,6 @@ public class Hero : MonoBehaviour
 
         heroCollider = GetComponent<Collider2D>(); //For checking ground\\
 
-        
     }
 
 
@@ -57,8 +61,6 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
-
-
 
         isGrounded = Physics2D.IsTouchingLayers(heroCollider, thisIsGround); //checks the colliders in a layer\\
 
@@ -75,22 +77,38 @@ public class Hero : MonoBehaviour
         }
 
 
-
-        
-
         //JUMPING\\
         if (Input.GetMouseButton(0))
         {
-            Jump(); 
+            Jump();
         }
 
-        if(Input.touchCount > 0)
+        if (Input.touchCount > 0)
         {
-            Jump(); 
+            Jump();
         }
 
-        
-      
+        /*if (Input.GetKey(KeyCode.Space))
+        {
+            GameObject vine;
+            vine = Instantiate(flowerBullet);
+            flowerBullet.transform.position = transform.position + flowerDist * Vector3.right;
+        }*/
+
+        m_CooldownTimer -= Time.deltaTime;
+
+        if (m_CooldownTimer < 0.0f)
+        {
+            m_CooldownTimer = 0.0f;
+        }
+
+        if (Input.GetKey(KeyCode.Space) && (m_CooldownTimer == 0.0f))
+        {
+            GameObject vine;
+            vine = Instantiate(flowerBullet);
+            vine.transform.position = transform.position + flowerDist * Vector3.right;
+            m_CooldownTimer = m_CooldownDur;
+        }
     }
 
     //HERMES BOOST\\
@@ -115,7 +133,7 @@ public class Hero : MonoBehaviour
     {
         //heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump); //Y is the hero jumping\\
         heroRigidbody.AddForce(Vector2.up * heroJump);
-        Debug.Log("Jump!");
+        //Debug.Log("Jump!");
 
 
 
@@ -133,22 +151,7 @@ public class Hero : MonoBehaviour
         }
     }
 
-    /*protected void OnCollsionEnter(Collision aCollision)
-    {
-        GameObject aCollisionObject;
-        aCollisionObject = aCollision.gameObject;
-
-        //When enemy runs into hero, deactive the hero\\
-
-        Enemy aEnemy;
-        aEnemy = aCollisionObject.GetComponent<Enemy>();
-
-        if (aEnemy != null)
-        {
-            gameObject.SetActive(false);
-            print("YOU DIED!!!");
-        }
-    }*/
+   
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
@@ -162,10 +165,21 @@ public class Hero : MonoBehaviour
     {
         if (gameObject.tag == "HermesShoe")
         {
-           
+            
+            
         }
         
     }
 
+    protected void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
+            print("Game over!");
+        }
 
+      
+        
+    }
 }
