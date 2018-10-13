@@ -23,12 +23,12 @@ public class Hero : MonoBehaviour
     //JUMPING TIMER\\
     public float countdown;
     [SerializeField] public float timer;
+    public bool floating;
 
     //SPEED BOOST\\
     [Header("Power-Ups")]
     [SerializeField] bool hermesShoe;
     [SerializeField] private float hermesSpeed;
-
     [SerializeField] bool aPomegranate;
     [SerializeField] Collider2D pomegranateCollider;
 
@@ -41,6 +41,9 @@ public class Hero : MonoBehaviour
     [SerializeField] private float flowerDist;
     [SerializeField] private float m_CooldownDur = 1.0f;
     [SerializeField] private float m_CooldownTimer = 0.0f;
+
+    //HERO HEALTH\\
+    [SerializeField] public int heroHealth = 3;
 
 
     void Start()
@@ -82,6 +85,10 @@ public class Hero : MonoBehaviour
         {
             Jump();
         }
+         if (Input.GetMouseButtonUp(0))
+        {
+            floating = false;
+        }
 
         if (Input.touchCount > 0)
         {
@@ -100,7 +107,7 @@ public class Hero : MonoBehaviour
         if (m_CooldownTimer < 0.0f)
         {
             m_CooldownTimer = 0.0f;
-            Destroy(flowerBullet);
+            //Destroy(flowerBullet);
         }
 
         if (Input.GetKey(KeyCode.Space) && (m_CooldownTimer == 0.0f))
@@ -134,34 +141,38 @@ public class Hero : MonoBehaviour
     void Jump()
     {
         //heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump); //Y is the hero jumping\\
-        heroRigidbody.AddForce(Vector2.up * heroJump);
         //Debug.Log("Jump!");
 
 
 
         if (isGrounded)
         {
-            if (timer < countdown)
-            {
-                heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump);
-                timer += Time.deltaTime;
-            }
+            heroRigidbody.AddForce(Vector2.up * heroJump);
+            floating = true;
+        }
+
+
+        if (timer < countdown && floating)
+        {
+            heroRigidbody.velocity = new Vector2(heroRigidbody.velocity.x, heroJump);
+            timer += Time.deltaTime;
         }
         else
         {
             timer = 0;
+            floating = false;
         }
     }
 
-   
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+
+    /*protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
             gameObject.SetActive(false);
         }
-    }
+    }*/
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
@@ -173,7 +184,7 @@ public class Hero : MonoBehaviour
         
     }
 
-    protected void OnCollisionStay2D(Collision2D collision)
+   /* protected void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -183,5 +194,5 @@ public class Hero : MonoBehaviour
 
       
         
-    }
+    }*/
 }
