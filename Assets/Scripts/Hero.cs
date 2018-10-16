@@ -25,6 +25,7 @@ public class Hero : MonoBehaviour
     [SerializeField] public float timer;
     public bool floating;
 
+
     //SPEED BOOST\\
     [Header("Power-Ups")]
     [SerializeField] bool hermesShoe;
@@ -64,64 +65,77 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
-
-        isGrounded = Physics2D.IsTouchingLayers(heroCollider, thisIsGround); //checks the colliders in a layer\\
-
-
-        //MOVEMENT\\
-        //heroRigidbody.velocity = (Vector2.right * heroSpeed); //Only want the player to move a constant speed, not messing with Y value\\
-        if (!hermesShoe)
-        {
-            heroRigidbody.gameObject.transform.Translate(Vector2.right * heroSpeed * Time.deltaTime);
-        }
-        else
-        {
-            heroRigidbody.gameObject.transform.Translate(Vector2.right * hermesSpeed * Time.deltaTime); //HERMES BOOST\\
-        }
+   
 
 
-        //JUMPING\\
-        if (Input.GetMouseButton(0))
-        {
-            Jump();
-        }
-         if (Input.GetMouseButtonUp(0))
-        {
-            floating = false;
-        }
 
-        if (Input.touchCount > 0)
-        {
-            Jump();
-        }
 
-        /*if (Input.GetKey(KeyCode.Space))
-        {
-            GameObject vine;
-            vine = Instantiate(flowerBullet);
-            flowerBullet.transform.position = transform.position + flowerDist * Vector3.right;
-        }*/
 
-        m_CooldownTimer -= Time.deltaTime;
 
-        if (m_CooldownTimer < 0.0f)
-        {
-            m_CooldownTimer = 0.0f;
-            //Destroy(flowerBullet);
-        }
-
-        if (Input.GetKey(KeyCode.Space) && (m_CooldownTimer == 0.0f))
-        {
-            GameObject vine;
-            vine = Instantiate(flowerBullet);
-            vine.transform.position = transform.position + flowerDist * Vector3.right;
-            m_CooldownTimer = m_CooldownDur;
             
-        }
-    }
 
-    //HERMES BOOST\\
-    public IEnumerator HermesBoost()
+            isGrounded = Physics2D.IsTouchingLayers(heroCollider, thisIsGround); //checks the colliders in a layer\\
+
+
+            //MOVEMENT\\
+            //heroRigidbody.velocity = (Vector2.right * heroSpeed); //Only want the player to move a constant speed, not messing with Y value\\
+            if (!hermesShoe)
+            {
+                heroRigidbody.gameObject.transform.Translate(Vector2.right * heroSpeed * Time.deltaTime);
+            }
+            else
+            {
+                heroRigidbody.gameObject.transform.Translate(Vector2.right * hermesSpeed * Time.deltaTime); //HERMES BOOST\\
+            }
+
+
+            //JUMPING\\
+            if (Input.GetMouseButton(0))
+            {
+                Jump();
+            }
+             if (Input.GetMouseButtonUp(0))
+            {
+                floating = false;
+            }
+
+            if (Input.touchCount > 0)
+            {
+                Jump();
+            }
+
+            m_CooldownTimer -= Time.deltaTime;
+
+            if (m_CooldownTimer < 0.0f)
+            {
+                m_CooldownTimer = 0.0f;
+                //Destroy(flowerBullet);
+            }
+
+            if (Input.GetKey(KeyCode.Space) && (m_CooldownTimer == 0.0f))
+            {
+                GameObject vine;
+                vine = Instantiate(flowerBullet);
+                vine.transform.position = transform.position + flowerDist * Vector3.right;
+                m_CooldownTimer = m_CooldownDur;
+
+            }
+
+
+
+
+
+            
+
+
+
+
+
+
+}
+
+//HERMES BOOST\\
+public IEnumerator HermesBoost()
     {
         hermesShoe = true;
         yield return new WaitForSeconds(4);
