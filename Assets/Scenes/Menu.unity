@@ -561,9 +561,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'VESION 0.0.1b
+  m_Text: 'VESION 0.1.0b
 
-    10.02.01'
+    10.16.01'
 --- !u!222 &1627669835
 CanvasRenderer:
   m_ObjectHideFlags: 0

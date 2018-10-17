@@ -26,15 +26,14 @@ public class Hero : MonoBehaviour
     public bool floating;
 
 
-    //SPEED BOOST\\
+    //POWER UPS\\
     [Header("Power-Ups")]
     [SerializeField] bool hermesShoe;
     [SerializeField] private float hermesSpeed;
     [SerializeField] bool aPomegranate;
     [SerializeField] Collider2D pomegranateCollider;
 
-    private string theRules = " Tap to jump and hold down for longer jump " +
-        " White ball is a speed boost " + " red ball allows you to walk through objects ";
+
 
     //VINE WHIP\\
     
@@ -57,10 +56,7 @@ public class Hero : MonoBehaviour
     }
 
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 400, 50), theRules);
-    }
+
 
 
     void Update()
@@ -180,11 +176,12 @@ public IEnumerator HermesBoost()
 
 
 
-    /*protected void OnCollisionEnter2D(Collision2D collision)
+   /* protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
             gameObject.SetActive(false);
+            print("Game over!");
         }
     }*/
 
