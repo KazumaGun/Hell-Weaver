@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 9d8830fa03c07ae4fa399ed152580674
   - enabled: 1
-    path: Assets/Scenes/Hell Weaver Pre.unity
+    path: Assets/Scenes/HellWeaverPlay.unity
     guid: f1d0e4ebaf38e1a48abcbeb8bec51384
+  - enabled: 1
+    path: Assets/Scenes/Main_Menu.unity
+    guid: ccf7fa237cac8c34e8fad3201fb17898
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: a3f1f6be8b3cabf4495e86613ecf0ff5
   m_configObjects: {}
