@@ -32,7 +32,7 @@ public class Hero : MonoBehaviour
     [SerializeField] private float hermesSpeed;
     [SerializeField] bool aPomegranate;
     [SerializeField] Collider2D pomegranateCollider;
-
+    [SerializeField] private TutorialScroller tutScroll;
 
 
     //VINE WHIP\\
@@ -77,11 +77,11 @@ public class Hero : MonoBehaviour
             //heroRigidbody.velocity = (Vector2.right * heroSpeed); //Only want the player to move a constant speed, not messing with Y value\\
             if (!hermesShoe)
             {
-                heroRigidbody.gameObject.transform.Translate(Vector2.right * heroSpeed * Time.deltaTime);
+            tutScroll.tutorialSpeed = heroSpeed;
             }
             else
             {
-                heroRigidbody.gameObject.transform.Translate(Vector2.right * hermesSpeed * Time.deltaTime); //HERMES BOOST\\
+            tutScroll.tutorialSpeed = hermesSpeed;
             }
 
 
@@ -133,6 +133,7 @@ public class Hero : MonoBehaviour
 //HERMES BOOST\\
 public IEnumerator HermesBoost()
     {
+        Debug.Log("THNING TIGN");
         hermesShoe = true;
         yield return new WaitForSeconds(4);
         hermesShoe = false;

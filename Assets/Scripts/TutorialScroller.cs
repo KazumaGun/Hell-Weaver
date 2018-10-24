@@ -7,7 +7,7 @@ public class TutorialScroller : MonoBehaviour
 
     //MOVEMENT\\
     private Rigidbody2D tutorialRigidBody = null;
-    [SerializeField] private float tutorialSpeed = 2.0f;
+    public float tutorialSpeed = 2.0f;
 
     void Start()
     {

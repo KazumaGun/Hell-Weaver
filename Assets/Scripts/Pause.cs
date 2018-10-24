@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
-
-	// Use this for initialization
-	void Start ()
+    bool isPaused = false;
+public void pauseGame()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-
-        if (Input.GetKeyDown(KeyCode.P))
+        if (isPaused)
         {
-            if (Time.timeScale == 1)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
+            Time.timeScale = 1;
+            isPaused = false;
+
         }
-	}
+        else
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+        }
+    }
 
 }
